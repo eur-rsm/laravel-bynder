@@ -2,6 +2,8 @@
 
 namespace EUR\RSM\LaravelBynder;
 
+use EUR\RSM\LaravelBynder\Contracts\BynderServiceContract;
+use EUR\RSM\LaravelBynder\Services\BynderService;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -14,7 +16,7 @@ class LaravelBynderServiceProvider extends ServiceProvider
     /**
      * @var string
      */
-    protected $packageRootDir = __DIR__ . '/../..';
+    protected $packageRootDir = __DIR__ . '/..';
 
     /**
      *
@@ -33,4 +35,15 @@ class LaravelBynderServiceProvider extends ServiceProvider
             $this->packageRootDir . '/config/laravel-bynder.php' => config_path('laravel-bynder.php'),
         ]);
     }
+
+    /**
+     * Class bindings for facades services.
+     */
+    public function getClassBindings()
+    {
+        $this->app->singleton(BynderServiceContract::class, function () {
+            return new BynderService();
+        });
+    }
+
 }
