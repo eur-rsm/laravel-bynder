@@ -16,6 +16,8 @@ Add to your `config/app.php` alias.
                 
     'Bynder' => \EUR\RSM\LaravelBynder\Facades\BynderServiceFacade::class,
     
+Run the publish command.
+    
     php artisan vendor:publish --provider="\EUR\RSM\LaravelBynder\LaravelBynderServiceProvider"
     
 Edit the published config `laravel-bynder.php` file located in the `config` directory.
