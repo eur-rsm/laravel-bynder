@@ -3,12 +3,13 @@
 namespace EUR\RSM\LaravelBynder\Services;
 
 use EUR\RSM\LaravelBynder\Connectors\BynderConnector;
+use EUR\RSM\LaravelBynder\Contracts\BynderServiceContract;
 
 /**
  * Class BynderService
  * @package EUR\RSM\LaravelBynder\Services
  */
-final class BynderService
+final class BynderService implements BynderServiceContract
 {
     /**
      * @var BynderConnector
@@ -24,21 +25,10 @@ final class BynderService
     }
 
     /**
-     * @param array|null $query
-     * @return \GuzzleHttp\Promise\Promise
-     * @throws \Exception
+     * @return \Bynder\Api\Impl\BynderApi|BynderConnector
      */
-    public function getMediaList(array $query = null)
+    public function getApi()
     {
-        if ($query === null) {
-            $query = [
-                'count' => true,
-                'limit' => 2,
-                'type' => 'image',
-                'versions' => 1,
-            ];
-        }
-
-        return $this->bynderApi->getAssetBankManager()->getMediaList($query)->wait();
+        return $this->bynderApi;
     }
 }
